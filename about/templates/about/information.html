@@ -1,0 +1,75 @@
+{% extends 'catalog/base.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+  <!-- end about section -->
+<div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Рады видеть вас с нами!</h1>
+          <p>Вы прямо сейчас можете перейти в наш магазин, и заказать по самым низким ценам, любая кухня, множество опций меню, где каждый сможет
+          найти что то свое.</p>
+          <p><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> перейти в магазин</button></p>
+        </div>
+      </div>
+
+ <!-- about section -->
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="custom_heading-container">
+        <h3 class=" " style="margin-top:40px; margin-bottom:40px;">
+          О нас
+        </h3>
+      </div>
+      <p class="layout_padding2-top">
+        Наша компания, была основана в 2004 году. Начиная с этого момента, наша сеть, начала стремительно увеличиваться
+        и распространяться. Мы рады всем кто был с нами все это время. Сейчас мы являемся лидерами в своей сфере.
+      </p>
+      <div class="img-box layout_padding2">
+        <img src="images/about-img.jpg" alt="">
+      </div>
+      <p class="layout_padding2-bottom">
+        В данный момент в нашем ассортимерте есть множество категорий. Мы развиваемся в разных направления, а также стараемся
+        добавлять что то от себя, что бы наша продукция, была единственной и неповторимой на рынке.
+      </p>
+    </div>
+    <div class="container">
+      <div class="btn-box">
+        <a href="{% url 'catalog:store' %}">
+          Перейти в магазин
+        </a>
+        <hr>
+      </div>
+    </div>
+  </section>
+
+<div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Наши контакты</h2>
+            <p style="margin-top:40px" >Телефон: +375 (29) 221-13-11 <br>Почта: breadshop@gmail.com </p>
+          </div>
+          <div class="col-md-4">
+            <h2>Наши рестораны</h2>
+            <h4 style="margin-top:40px">Витебск</h4>
+            <p style="margin-top:20px"><strong>"Bread Shop" - </strong>Ул. Гагарина 41А</p>
+            <h4 style="margin-top:20px">Минск</h4>
+            <p style="margin-top:20px"><strong>"Bread Shop" - </strong>Ул. Ленина 26</p>
+          </div>
+          <div class="col-md-4">
+            <h2>Почему именно мы</h2>
+            <p style="margin-top:40px" >На нашей кухне работают только квалифицированный специалисты. Каждый продукт перед попаданием
+            на кухню проходит строгий отбор. С нами работают самые лучшие поставщики, которые не сомневаются в качестве своеих продуктов.</p>
+          </div>
+        </div>
+        <hr>
+      </div>
+<h1 align="center">Наше местоположение</h1>
+<div align="center" style="margin-top:60px; height 100%;">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2276.3989339705117!2d30.22722031572013!3d55.211270680412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46c5741c96b7c4f5%3A0x10a5c70ad1accf90!2z0YPQu9C40YbQsCDQk9Cw0LPQsNGA0LjQvdCwIDQxLCDQktC40YLQtdCx0YHQuiAyMTAwMTc!5e0!3m2!1sru!2sby!4v1667244792831!5m2!1sru!2sby" width="80%" height="450" style="border:0; margin-bottom:40px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+{% endblock %}

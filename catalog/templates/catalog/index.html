@@ -1,0 +1,175 @@
+{% extends 'catalog/base.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+
+{%block content%}
+{% load static %}
+
+
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- shop -->
+
+			{%for cal in category_menu %}
+			<div class="col-md-4 col-xs-6">
+				<div class="shop">
+					<div class="shop-img">
+						<img src="{{cal.image.url}}" alt="">
+					</div>
+					<div class="shop-body">
+						<h3>Каталог<br>{{cal.name}}</h3>
+						<a href="{{ cal.get_absolute_url }}" class="cta-btn">Смотреть <i class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+			</div>
+			{%endfor%}
+			</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<!-- section title -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<h3 class="title">Наши новинки</h3>
+					</div>
+			</div>
+			<!-- /section title -->
+
+			<!-- Products tab & slick -->
+			<div class="col-md-12">
+				<div class="row">
+					<div class="products-tabs">
+						<!-- tab -->
+						<div id="tab1" class="tab-pane active">
+							<div class="products-slick" data-nav="#slick-nav-1">
+								<!-- product -->
+								{% for product in products %}
+								<div class="product">
+									<div class="product-img">
+										<img src="{{ product.image.url }}" alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{ product.category }}</p>
+										<h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+										<h4 class="product-price">{{product.price}}р. <del class="product-old-price">{{product.price_old}}р.</del></h4>
+										<div class="product-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+										<div class="product-btns">
+												<button onclick="window.location.href = '{{ product.get_absolute_url }}';" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">ОПИСАНИЕ</span></button>
+										</div>
+									</div>
+									<div class="add-to-cart">
+									<form action="{% url 'cart:cart_add' product.id %}" method="post">
+										{{ cart_product_form }}
+										{% csrf_token %}
+										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> В КОРЗИНУ</button>
+									</form>
+									</div>
+								</div>
+								<!-- /product -->
+								{% endfor %}
+
+								<!-- /product -->
+							</div>
+							<div id="slick-nav-1" class="products-slick-nav"></div>
+						</div>
+						<!-- /tab -->
+					</div>
+				</div>
+			</div>
+			<!-- Products tab & slick -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<!-- section title -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<h3 class="title">Лидеры продаж</h3>
+				</div>
+			</div>
+			<!-- /section title -->
+
+			<!-- Products tab & slick -->
+			<div class="col-md-12">
+				<div class="row">
+					<div class="products-tabs">
+						<!-- tab -->
+						<div id="tab2" class="tab-pane fade in active">
+							<div class="products-slick" data-nav="#slick-nav-2">
+								<!-- product -->
+								{% for product in products %}
+								<div class="product">
+									<div class="product-img">
+										<img src="{{ product.image.url }}" alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{ product.category }}</p>
+										<h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+										<h4 class="product-price">{{product.price}}р. <del class="product-old-price">{{product.price_old}}р.</del></h4>
+										<div class="product-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+										<div class="product-btns">
+												<button onclick="window.location.href = '{{ product.get_absolute_url }}';" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">ОПИСАНИЕ</span></button>
+										</div>
+									</div>
+									<div class="add-to-cart">
+									<form action="{% url 'cart:cart_add' product.id %}" method="post">
+										{{ cart_product_form }}
+										{% csrf_token %}
+										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> В КОРЗИНУ</button>
+									</form>
+									</div>
+								</div>
+								<!-- /product -->
+								{% endfor %}
+							</div>
+							<div id="slick-nav-2" class="products-slick-nav"></div>
+						</div>
+						<!-- /tab -->
+					</div>
+				</div>
+			</div>
+			<!-- /Products tab & slick -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+{% endblock %}

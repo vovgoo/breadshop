@@ -1,0 +1,60 @@
+{% extends 'catalog/base.html' %}
+{% block title %}
+Bread Shop | Корзина
+{% endblock %}
+
+{% load static %}
+
+{%block content%}
+
+<h1 style="text-align:center; margin-bottom: 40px; margin-top: 40px;">Ваши товары</h1>
+{% if cart.len == 0 %}
+<h1 style="text-align:center; margin-bottom: 40px; margin-top: 40px;">Ваша корзина пуста</h1>
+{% else %}
+    <table class="cart" border="0" align = "center" width="100%">
+        <thead>
+        <tr>
+            <th style="text-align:center;">Изображение</th>
+            <th style="text-align:center;">Продукт</th>
+            <th style="text-align:center;">Количество</th>
+            <th style="text-align:center;">Удалить товар</th>
+            <th style="text-align:center;">Цена за 1 товар</th>
+            <th style="text-align:center;">Общая цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td style="text-align:center;">
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    {% static 'img/no_image.png' %}
+                                {% endif %}"  width="150" >
+                        </a>
+                    </td>
+                    <td style="text-align:center;"><strong>{{ product.name }}</strong></td>
+                    <td style="text-align:center;">{{ item.quantity }}</td>
+                    <td style="text-align:center;"><a href="{% url 'cart:cart_remove' product.id%}">Удалить из <br> корзины</a></td>
+                    <td class="num" style="text-align:center;">{{ item.price }} р.</td>
+                    <td class="num" style="text-align:center;">{{ item.total_price }} р.</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td style="text-align:center;"><strong>Общая стоимость</strong></td>
+            <td style="text-align:center;" class="num">{{ cart.get_total_price }} р.</td>
+            <td colspan="2"></td>
+            <td align = 'center' width="200"><button onclick="document.location='{% url 'catalog:store' %}'" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> В магазин</button></td>
+            <td align = 'center' width="200"><button onclick="document.location='{% url 'orders:order_create' %}'" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Заказать</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+    <p class="text-right">
+    </p>
+{% endif %}
+{% endblock %}

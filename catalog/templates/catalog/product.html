@@ -1,0 +1,212 @@
+{% extends 'catalog/base.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb-tree">
+					<li><a href="{% url 'catalog:home'%}">Главная страница</a></li>
+					<li><a href="{% url 'catalog:store'%}">Магазин</a></li>
+					<li><a href="#"> {{product.category }} </a></li>
+					<li class="active">{{ product.name }}</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- Product main img -->
+			<div class="col-md-5 col-md-push-2">
+				<div id="product-main-img">
+					<div class="product-preview">
+						<img src="{{ product.image.url }}" alt="">
+					</div>
+				</div>
+			</div>
+			<!-- /Product main img -->
+
+			<!-- Product thumb imgs -->
+			<div class="col-md-2  col-md-pull-5">
+				<div id="product-imgs">
+					<div class="product-preview">
+						<img src="{{ product.image.url }}" alt="">
+					</div>
+				</div>
+			</div>
+			<!-- /Product thumb imgs -->
+
+			<!-- Product details -->
+			<div class="col-md-5">
+				<div class="product-details">
+					<h2 class="product-name">{{ product.name }}</h2>
+					<div>
+						<div class="product-rating">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+					</div>
+					<div>
+						<h3 class="product-price">{{product.price}}р. <del class="product-old-price">{{product.price_old}}р. </del></h3>
+						<span class="product-available">В наличии</span>
+					</div>
+					<p>{{ product.description|linebreaks }}</p>
+
+
+					<div class="add-to-cart">
+						<div class="qty-label">
+						<form action="{% url 'cart:cart_add' product.id %}" method="post">
+							{{ cart_product_form_all }}
+							{% csrf_token %}
+							<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> В КОРЗИНУ</button>
+						</form>
+						</div>
+					</div>
+
+					<ul class="product-links">
+						<li>Категория:</li>
+						<li><a href=""> {{ product.category }}</a></li>
+					</ul>
+
+					<ul class="product-links">
+						<li>Поделиться:</li>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+
+				</div>
+			</div>
+			<!-- /Product details -->
+
+			<!-- Product tab -->
+			<div class="col-md-12">
+				<div id="product-tab">
+					<!-- product tab nav -->
+					<ul class="tab-nav">
+						<li class="active"><a data-toggle="tab" href="#tab1">Акция</a></li>
+						<li><a data-toggle="tab" href="#tab2">Детали</a></li>
+					</ul>
+					<!-- /product tab nav -->
+
+					<!-- product tab content -->
+					<div class="tab-content">
+						<!-- tab1  -->
+						<div id="tab1" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-md-12">
+									<p>Любой из наших товаров делается и подается в срок не более 30 минут после заказа. Если после вашего заказа, ваша еда прибывает не в срок наше заведение оплачивает вам заказ. Приятного аппетита!</p>
+								</div>
+							</div>
+						</div>
+						<!-- /tab1  -->
+
+						<!-- tab2  -->
+						<div id="tab2" class="tab-pane fade in">
+							<div class="row">
+								<div class="col-md-12">
+									<p>Телефон  <strong>+375 (29) 221-13-11</strong> <br>Почта <strong>breadshop@gmail.com</strong> <br>Адрес для самовывоза <strong>г.Витебск Гагарина 41А</strong> </p>
+								</div>
+							</div>
+						</div>
+						<!-- /tab2  -->
+					</div>
+					<!-- /product tab content  -->
+				</div>
+			</div>
+			<!-- /product tab -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- Section -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="section-title text-center">
+					<h3 class="title">ЛИДЕРЫ ПРОДАЖ</h3>
+				</div>
+			</div>
+
+			<!-- product -->
+
+			<div class="col-md-12">
+				<div class="row">
+					<div class="products-tabs">
+						<!-- tab -->
+						<div id="tab2" class="tab-pane fade in active">
+							<div class="products-slick" data-nav="#slick-nav-2">
+								<!-- product -->
+								{% for product in products %}
+								<div class="product">
+									<div class="product-img">
+										<img src="{{ product.image.url }}" alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{ product.category }}</p>
+										<h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+										<h4 class="product-price">{{product.price}}р. <del class="product-old-price">{{product.price_old}}р.</del></h4>
+										<div class="product-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+										<div class="product-btns">
+												<button onclick="window.location.href = '{{ product.get_absolute_url }}';" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">ОПИСАНИЕ</span></button>
+										</div>
+									</div>
+									<div class="add-to-cart">
+									<form action="{% url 'cart:cart_add' product.id %}" method="post">
+										{{ cart_product_form }}
+										{% csrf_token %}
+										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> В КОРЗИНУ</button>
+									</form>
+									</div>
+								</div>
+								<!-- /product -->
+								{% endfor %}
+							</div>
+							<div id="slick-nav-2" class="products-slick-nav"></div>
+						</div>
+						<!-- /tab -->
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /Section -->
+
+{% endblock %}
